@@ -1,10 +1,43 @@
 import React from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { motion } from "framer-motion";
+
+const dropIn = {
+  hidden: {
+    y: "-100vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "100vh",
+    opacity: 0,
+  },
+};
+
 function Modal({ openModal, closeModal }) {
   if (!openModal) return null;
   return (
-    <div className="overlay" onClick={closeModal}>
-      <section
+    <motion.div
+      className="overlay"
+      onClick={closeModal}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.section
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
         className="modal"
         onClick={(e) => {
           e.stopPropagation();
@@ -26,8 +59,8 @@ function Modal({ openModal, closeModal }) {
             Close
           </button>
         </footer>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }
 

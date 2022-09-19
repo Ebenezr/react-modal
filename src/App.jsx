@@ -8,7 +8,7 @@ function App() {
   return (
     <main className="App">
       <button className="btn main-btn" onClick={() => setOpenModal(true)}>
-        Open
+        Open Modal
       </button>
       <Modal openModal={openModal} closeModal={() => setOpenModal(false)} />
     </main>
